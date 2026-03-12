@@ -13,6 +13,14 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
 
+        - id: users-ws
+          uri: lb://user-ws
+          predicates:
+            - Path=/users-ws/**
+          filters:
+            - RemoveRequestHeader=Cookie
+            - StripPrefix=1
+
 eureka:
   client:
     service-url:
@@ -21,9 +29,9 @@ eureka:
 server:
   port: 8082
 
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
-    org.springframework.cloud.loadbalancer: DEBUG
-    com.netflix.discovery: DEBUG
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: DEBUG
+#    org.springframework.cloud.loadbalancer: DEBUG
+#    com.netflix.discovery: DEBUG
 
