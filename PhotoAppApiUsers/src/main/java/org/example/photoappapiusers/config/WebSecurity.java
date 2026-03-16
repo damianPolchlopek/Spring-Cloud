@@ -22,10 +22,10 @@ public class WebSecurity {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/users/**").permitAll()
-//                        .access(
-//                                new WebExpressionAuthorizationManager("hasIpAddress('"+environment.getProperty("ip.address")+"')")
-//                        )
+                        .requestMatchers("/users/**")
+                        .access(
+                                new WebExpressionAuthorizationManager("hasIpAddress('"+environment.getProperty("gateway.ip")+"')")
+                        )
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()
                 )
