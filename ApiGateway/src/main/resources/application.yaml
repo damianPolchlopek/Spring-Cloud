@@ -13,6 +13,13 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
 
+        - id: users-post
+          uri: lb://user-ws
+          predicates:
+            - Path=/users/**
+          filters:
+            - RemoveRequestHeader=Cookie
+
         - id: users-ws
           uri: lb://user-ws
           predicates:
