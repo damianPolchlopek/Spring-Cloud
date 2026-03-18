@@ -10,8 +10,10 @@ spring:
           predicates:
             - Path=/users/status/check
             - Method=GET
+            - Header=Authorization, Bearer (.*)
           filters:
             - RemoveRequestHeader=Cookie
+            - AuthorizationHeaderFilter
 
         - id: users-ws-login
           uri: lb://user-ws
@@ -25,11 +27,9 @@ spring:
         - id: create-user
           uri: lb://user-ws
           predicates:
-            - Path=/users/**
+            - Path=/users
           filters:
             - RemoveRequestHeader=Cookie
-
-
 
 
 eureka:
@@ -39,6 +39,9 @@ eureka:
 
 server:
   port: 8082
+
+token:
+  secret: aI9w59fjipR3V/IeBSe32UlWf2o2qIFpB+gh7FBe+9g=
 
 #logging:
 #  level:
