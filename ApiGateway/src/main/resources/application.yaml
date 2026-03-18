@@ -13,20 +13,24 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
 
-        - id: users-post
+        - id: users-ws-login
+          uri: lb://user-ws
+          predicates:
+            - Path=/users-ws/users/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - StripPrefix=1
+
+        - id: create-user
           uri: lb://user-ws
           predicates:
             - Path=/users/**
           filters:
             - RemoveRequestHeader=Cookie
 
-        - id: users-ws
-          uri: lb://user-ws
-          predicates:
-            - Path=/users-ws/**
-          filters:
-            - RemoveRequestHeader=Cookie
-            - StripPrefix=1
+
+
 
 eureka:
   client:
