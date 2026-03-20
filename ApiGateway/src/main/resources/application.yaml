@@ -1,6 +1,8 @@
 spring:
   application:
     name: api-gateway
+  config:
+    import: "configserver:http://localhost:8012"
 
   cloud:
     gateway:
@@ -39,9 +41,6 @@ eureka:
 
 server:
   port: 8082
-
-token:
-  secret: aI9w59fjipR3V/IeBSe32UlWf2o2qIFpB+gh7FBe+9g=
 
 #logging:
 #  level:
