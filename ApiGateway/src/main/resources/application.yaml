@@ -33,6 +33,16 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
 
+        - id: account-ws-checker
+          uri: lb://account-ws
+          predicates:
+            - Path=/account/status/check
+            - Method=GET
+            - Header=Authorization, Bearer (.*)
+          filters:
+            - RemoveRequestHeader=Cookie
+            - AuthorizationHeaderFilter
+
 
 eureka:
   client:

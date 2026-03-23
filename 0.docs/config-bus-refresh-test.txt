@@ -1,0 +1,28 @@
+docker run -d \
+  --name rabbitmq \
+  -p 5672:5672 \
+  -p 15672:15672 \
+  rabbitmq:3-management
+
+
+
+Jak to przetestowac?
+
+# 1. Uruchom RabbitMQ (komenda u góry)
+
+# 2. Uruchom Config Server (port 8888)
+# 3. Uruchom Client Service (port 8080)
+
+# 4. Sprawdź aktualną wartość
+curl http://localhost:8080/message
+# → "Wiadomość v1"
+
+# 5. Zmień wartość w pliku client-service.yml w repo Git
+#    np. na "Wiadomość v2" i zrób commit
+
+# 6. Wywołaj refresh na Config Serverze – rozgłosi do WSZYSTKICH serwisów
+curl -X POST http://localhost:8888/actuator/busrefresh
+
+# 7. Sprawdź ponownie – bez restartu!
+curl http://localhost:8080/message
+# → "Wiadomość v2"
