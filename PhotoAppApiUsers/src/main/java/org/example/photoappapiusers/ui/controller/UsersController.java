@@ -7,16 +7,21 @@ import org.example.photoappapiusers.service.UserService;
 import org.example.photoappapiusers.shared.UserDto;
 import org.example.photoappapiusers.ui.request.CreateUserRequest;
 import org.example.photoappapiusers.ui.response.CreateUserResponseModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RefreshScope
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
 public class UsersController {
+
+    @Value("${app.message:default}")
+    private String message;
 
     private final UserService userService;
     private final Environment environment;
@@ -24,7 +29,7 @@ public class UsersController {
     @GetMapping("/status/check")
     public String check(HttpServletRequest request) {
         return "OK from port: " + environment.getProperty("local.server.port")
-                + ", caller IP: " + request.getRemoteAddr();
+                + ", caller IP: " + request.getRemoteAddr() + ", config msg: " + message;
     }
 
     @PostMapping
