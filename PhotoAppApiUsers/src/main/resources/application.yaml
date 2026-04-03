@@ -9,6 +9,10 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+  cloud:
+    config:
+      username: client
+      password: 123456789
   config:
     import: "configserver:http://localhost:8012"
 

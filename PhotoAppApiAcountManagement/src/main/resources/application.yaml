@@ -4,6 +4,10 @@ spring:
   devtools:
     restart:
       enabled: true
+  cloud:
+    config:
+      username: client
+      password: 123456789
   config:
     import: "configserver:http://localhost:8012"
   rabbitmq:

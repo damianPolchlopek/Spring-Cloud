@@ -1,6 +1,11 @@
 spring:
   application:
-    name: account-ws
+    name: config-server
+  security:
+    user:
+      name: admin
+      password: 123456789
+      roles: ADMIN
 
   cloud:
     config:
@@ -17,12 +22,24 @@ spring:
     username: guest
     password: guest
 
+my-spring:
+  security:
+    user:
+      name: client
+      password: 123456789
+      roles: CLIENT
+
 server:
   port: 8012
 
+encrypt:
+  key: mojsekretnyklucz
+
+debug: true
 
 management:
   endpoints:
     web:
       exposure:
         include: busrefresh, health
+
