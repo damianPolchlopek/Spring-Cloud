@@ -35,3 +35,6 @@ eureka:
       defaultZone: http://localhost:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${random.value}
+
+albums:
+  url: http://albums-ws/users/%s/albums

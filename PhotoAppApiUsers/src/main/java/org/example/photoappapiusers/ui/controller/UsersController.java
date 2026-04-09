@@ -6,13 +6,20 @@ import lombok.RequiredArgsConstructor;
 import org.example.photoappapiusers.service.UserService;
 import org.example.photoappapiusers.shared.UserDto;
 import org.example.photoappapiusers.ui.request.CreateUserRequest;
+import org.example.photoappapiusers.ui.response.AlbumResponseModel;
 import org.example.photoappapiusers.ui.response.CreateUserResponseModel;
+import org.example.photoappapiusers.ui.response.UserResponseModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @RefreshScope
 @RequiredArgsConstructor
@@ -41,6 +48,16 @@ public class UsersController {
         CreateUserResponseModel returnValue = CreateUserResponseModel.of(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(returnValue);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserResponseModel> getUser(@PathVariable String userId) {
+
+        UserDto userDto = userService.getUserByUserId(userId);
+
+        UserResponseModel result = UserResponseModel.of(userDto);
+
+        return ResponseEntity.ok().body(result);
     }
 
 }

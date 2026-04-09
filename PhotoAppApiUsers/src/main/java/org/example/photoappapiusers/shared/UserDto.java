@@ -3,6 +3,9 @@ package org.example.photoappapiusers.shared;
 import jakarta.validation.Valid;
 import org.example.photoappapiusers.data.UserEntity;
 import org.example.photoappapiusers.ui.request.CreateUserRequest;
+import org.example.photoappapiusers.ui.response.AlbumResponseModel;
+
+import java.util.List;
 
 public record UserDto(
         String firstName,
@@ -10,7 +13,8 @@ public record UserDto(
         String password,
         String email,
         String userId,
-        String encryptedPassword
+        String encryptedPassword,
+        List<AlbumResponseModel> albumsList
 ) {
     public UserDto(CreateUserRequest createUserRequest) {
         this(
@@ -19,7 +23,8 @@ public record UserDto(
             createUserRequest.password(),
             createUserRequest.email(),
             null,
-            null
+            null,
+                null
         );
     }
 
@@ -30,7 +35,20 @@ public record UserDto(
                 null,
                 user.getEmail(),
                 user.getUserId(),
-                user.getEncryptedPassword()
+                user.getEncryptedPassword(),
+                null
+        );
+    }
+
+    public UserDto setAlbumsList(List<AlbumResponseModel> albumsList) {
+        return new UserDto(
+                firstName,
+                lastName,
+                password,
+                email,
+                userId,
+                encryptedPassword,
+                albumsList
         );
     }
 }

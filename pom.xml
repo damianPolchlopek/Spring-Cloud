@@ -38,6 +38,7 @@
     <module>ApiGateway</module>
     <module>PhotoAppApiUsers</module>
     <module>PhotoAppApiAcountManagement</module>
+    <module>PhotoAppApiAlbums</module>
   </modules>
 
 

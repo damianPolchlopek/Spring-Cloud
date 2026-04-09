@@ -20,6 +20,17 @@ spring:
             - RemoveRequestHeader=Cookie
             - AuthorizationHeaderFilter
 
+        - id: user-ws-get
+          uri: lb://user-ws
+          predicates:
+            - Path=/users/**
+            - Method=GET
+            - Header=Authorization, Bearer (.*)
+          filters:
+            - RemoveRequestHeader=Cookie
+            - AuthorizationHeaderFilter
+#            - StripPrefix=1
+
         - id: users-ws-login
           uri: lb://user-ws
           predicates:
