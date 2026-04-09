@@ -38,3 +38,11 @@ eureka:
 
 albums:
   url: http://albums-ws/users/%s/albums
+
+logging:
+  level:
+    org:
+      example:
+        photoappapiusers:
+          data:
+            AlbumsServiceClient: DEBUG
