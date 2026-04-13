@@ -47,7 +47,11 @@ public class WebSecurity {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/users/**")
                         .access(
-                                new WebExpressionAuthorizationManager("hasIpAddress('"+environment.getProperty("gateway.ip")+"')")
+                                new WebExpressionAuthorizationManager("hasIpAddress('" + environment.getProperty("gateway.ip") + "')")
+                        )
+                        .requestMatchers("/actuator/**")
+                        .access(
+                                new WebExpressionAuthorizationManager("hasIpAddress('" + environment.getProperty("gateway.ip") + "')")
                         )
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()

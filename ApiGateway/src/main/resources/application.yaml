@@ -31,6 +31,15 @@ spring:
             - AuthorizationHeaderFilter
 #            - StripPrefix=1
 
+        - id: users-ws-actuator
+          uri: lb://user-ws
+          predicates:
+            - Path=/users-ws/actuator/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - StripPrefix=1
+
         - id: users-ws-login
           uri: lb://user-ws
           predicates:
