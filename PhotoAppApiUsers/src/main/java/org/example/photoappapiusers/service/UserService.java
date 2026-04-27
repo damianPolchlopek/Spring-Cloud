@@ -1,15 +1,13 @@
 package org.example.photoappapiusers.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.photoappapiusers.data.AlbumsServiceClient;
 import org.example.photoappapiusers.data.UserEntity;
 import org.example.photoappapiusers.data.UserRepository;
 import org.example.photoappapiusers.shared.UserDto;
 import org.example.photoappapiusers.ui.response.AlbumResponseModel;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
@@ -84,7 +83,9 @@ public class UserService implements UserDetailsService {
 //                restTemplate.exchange(albumsUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {});
 //        List<AlbumResponseModel> albumsList = albumsListResponse.getBody();
 
+        log.debug("[TEST] Request creation: " + userDto.toString());
         List<AlbumResponseModel> albums = albumsServiceClient.getAlbums(userId);
+        log.debug("[TEST] Request completed");
 
         return userDto.setAlbumsList(albums);
     }

@@ -46,6 +46,10 @@ logging:
         photoappapiusers:
           data:
             AlbumsServiceClient: DEBUG
+          service:
+            UserService: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name}, %X{traceId:-}, %X{spanId:-}]"
 
 management:
   endpoints:
@@ -59,6 +63,12 @@ management:
   health:
     circuitbreakers:
       enabled: true
+  tracing:
+    sampling:
+      probability: 1
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
 
 
 resilience4j:

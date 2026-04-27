@@ -18,3 +18,13 @@ eureka:
 
 logging:
   file: albums-ws.log
+  pattern:
+    level: "%5p [${spring.application.name}, %X{traceId:-}, %X{spanId:-}]"
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0  # 1.0 = 100% próbek (domyślnie 0.1 = 10%)
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
