@@ -17,7 +17,8 @@ eureka:
 
 
 logging:
-  file: albums-ws.log
+  file:
+    name: albums-ws.log
   pattern:
     level: "%5p [${spring.application.name}, %X{traceId:-}, %X{spanId:-}]"
 

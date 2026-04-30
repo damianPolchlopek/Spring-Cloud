@@ -1,0 +1,19 @@
+
+
+docker run --rm -it   --name elasticsearch   -p 9200:9200   -e "discovery.type=single-node"   -e "xpack.security.enabled=false"   docker.elastic.co/elasticsearch/elasticsearch:9.3.3
+
+
+
+docker run --rm -it \
+  -v "D:/Projekty/Spring-Cloud/ELK-docker/logstash/pipeline:/usr/share/logstash/pipeline" \
+  -v "D:/Projekty/Spring-Cloud:/logs" \
+  docker.elastic.co/logstash/logstash:9.3.3
+
+
+
+
+docker run --rm -it \
+  --name kibana \
+  -p 5601:5601 \
+  -e "ELASTICSEARCH_HOSTS=http://host.docker.internal:9200" \
+  docker.elastic.co/kibana/kibana:9.3.3
