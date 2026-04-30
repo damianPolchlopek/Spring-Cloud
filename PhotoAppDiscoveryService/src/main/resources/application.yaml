@@ -1,6 +1,12 @@
 spring:
   application:
-    name: PhotoAppDiscoveryService
+    name: discoveryservice
+  cloud:
+    config:
+      username: client
+      password: 123456789
+  config:
+    import: "configserver:http://localhost:8012"
 
 server:
   port: 8761
