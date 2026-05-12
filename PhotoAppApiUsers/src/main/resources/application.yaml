@@ -96,3 +96,10 @@ resilience4j:
         wait-duration: 2s
         enable-exponential-backoff: true
         exponential-backoff-multiplier: 5
+
+
+authorization:
+  token:
+    header:
+      name: Authorization
+      prefix: Bearer
